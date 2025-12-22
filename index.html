@@ -1784,38 +1784,39 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 <script>
-document.getElementById("btn-submit-whatsapp").addEventListener("click", function () {
+document.addEventListener("DOMContentLoaded", function () {
 
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFbKvKQlnerL03yO7yKZWRP6AGqezfbrIoapkgk3BT9h__BxKFYxILYjwtCXyPSsgF/exec";
 
   const form = document.getElementById("form-whatsapp");
   const sucesso = document.getElementById("mensagem-sucesso");
 
-  const dados = new URLSearchParams();
-  dados.append("nome", document.getElementById("whats-name").value);
-  dados.append("email", document.getElementById("whats-email").value);
-  dados.append("telefone", document.getElementById("whats-phone").value);
-  dados.append("empresa", document.getElementById("whats-company").value);
-  dados.append("mensagem", document.getElementById("whats-message").value);
-  dados.append("origem", "Landing Page");
-  dados.append("botao", "Formulario WhatsApp");
+  if (!form) return;
 
-  fetch(SCRIPT_URL, {
-    method: "POST",
-    body: dados
-  })
-  .then(() => {
-    // 1️⃣ Limpa o formulário
-    form.reset();
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); // bloqueia envio padrão
 
-    // 2️⃣ Esconde o formulário
-    form.classList.add("hidden");
+    const dados = new URLSearchParams();
+    dados.append("nome", document.getElementById("whats-name").value);
+    dados.append("email", document.getElementById("whats-email").value);
+    dados.append("telefone", document.getElementById("whats-phone").value);
+    dados.append("empresa", document.getElementById("whats-company").value);
+    dados.append("mensagem", document.getElementById("whats-message").value);
+    dados.append("origem", "Landing Page");
+    dados.append("botao", "Formulario WhatsApp");
 
-    // 3️⃣ Mostra mensagem de sucesso
-    sucesso.classList.remove("hidden");
-  })
-  .catch(() => {
-    alert("Erro ao enviar. Tente novamente.");
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      body: dados
+    })
+    .then(() => {
+      form.reset();
+      form.classList.add("hidden");
+      sucesso.classList.remove("hidden");
+    })
+    .catch(() => {
+      alert("Erro ao enviar. Tente novamente.");
+    });
   });
 
 });
@@ -1826,6 +1827,7 @@ document.getElementById("btn-submit-whatsapp").addEventListener("click", functio
  
  </body>
 </html>
+
 
 
 
