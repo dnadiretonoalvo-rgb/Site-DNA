@@ -1783,10 +1783,13 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-  <script>
+<script>
 document.getElementById("btn-submit-whatsapp").addEventListener("click", function () {
 
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFbKvKQlnerL03yO7yKZWRP6AGqezfbrIoapkgk3BT9h__BxKFYxILYjwtCXyPSsgF/exec";
+  const SCRIPT_URL = "COLE_AQUI_SUA_URL_DO_APPS_SCRIPT";
+
+  const form = document.getElementById("form-whatsapp");
+  const sucesso = document.getElementById("mensagem-sucesso");
 
   const dados = new URLSearchParams();
   dados.append("nome", document.getElementById("whats-name").value);
@@ -1802,7 +1805,14 @@ document.getElementById("btn-submit-whatsapp").addEventListener("click", functio
     body: dados
   })
   .then(() => {
-    alert("Dados enviados com sucesso!");
+    // 1️⃣ Limpa o formulário
+    form.reset();
+
+    // 2️⃣ Esconde o formulário
+    form.classList.add("hidden");
+
+    // 3️⃣ Mostra mensagem de sucesso
+    sucesso.classList.remove("hidden");
   })
   .catch(() => {
     alert("Erro ao enviar. Tente novamente.");
@@ -1811,8 +1821,10 @@ document.getElementById("btn-submit-whatsapp").addEventListener("click", functio
 });
 </script>
 
+
  
  </body>
 </html>
+
 
 
