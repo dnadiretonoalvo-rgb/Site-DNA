@@ -1787,43 +1787,56 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
 
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFbKvKQlnerL03yO7yKZWRP6AGqezfbrIoapkgk3BT9h__BxKFYxILYjwtCXyPSsgF/exec";
-
   const form = document.getElementById("form-whatsapp");
 
-  if (!form) return;
+  if (!form) {
+    console.error("Formulário WhatsApp não encontrado");
+    return;
+  }
 
   form.addEventListener("submit", function (e) {
-    e.preventDefault(); // bloqueia envio padrão
+    e.preventDefault();
 
-    const dados = new URLSearchParams();
-    dados.append("nome", document.getElementById("whats-name").value);
-    dados.append("email", document.getElementById("whats-email").value);
-    dados.append("telefone", document.getElementById("whats-phone").value);
-    dados.append("empresa", document.getElementById("whats-company").value);
-    dados.append("mensagem", document.getElementById("whats-message").value);
-    dados.append("origem", "Formulario WhatsApp");
-    dados.append("botao", "Abrir Conversa no WhatsApp");
+    const nome = document.getElementById("whats-name")?.value || "";
+    const email = document.getElementById("whats-email")?.value || "";
+    const telefone = document.getElementById("whats-phone")?.value || "";
+    const empresa = document.getElementById("whats-company")?.value || "";
+    const mensagem = document.getElementById("whats-message")?.value || "";
 
-    fetch(SCRIPT_URL, {
-      method: "POST",
-      body: dados
-    })
-    .then(() => {
-      alert("Solicitação enviada com sucesso!");
-      form.reset();
-    })
-    .catch(() => {
-      alert("Erro ao enviar. Tente novamente.");
+    if (!nome || !email || !telefone) {
+      alert("Preencha os campos obrigatórios.");
+      return;
+    }
+
+    const dados = new URLSearchParams({
+      nome,
+      email,
+      telefone,
+      empresa,
+      mensagem,
+      origem: "Formulario WhatsApp",
+      botao: "Abrir Conversa no WhatsApp"
     });
 
+    fetch(SCRIPT_URL, { method: "POST", body: dados })
+      .then(() => {
+        alert("Solicitação enviada com sucesso!");
+        form.reset();
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Erro ao enviar. Tente novamente.");
+      });
   });
 
 });
 </script>
 
+
  
  </body>
 </html>
+
 
 
 
