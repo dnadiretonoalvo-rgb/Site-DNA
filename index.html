@@ -1700,25 +1700,44 @@
         if (window.dataSdk) {
           const result = await window.dataSdk.create(leadData);
           
-          if (result.isOk) {
-            // Aguarda 500ms para garantir que o envio foi concluído
-            await new Promise(resolve => setTimeout(resolve, 500));
-            
-            // Fecha o modal
-            modalWhatsapp.classList.remove('active');
-            
-            // Aguarda mais 300ms para suavizar a transição
-            await new Promise(resolve => setTimeout(resolve, 300));
-            
-            // Redireciona para o WhatsApp
-            const whatsappUrl = 'https://wa.me/message/BWP7HVL34QQ4P1';
-            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-            
-            // Reseta o botão e o formulário
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-            formWhatsapp.reset();
-          } else {
+if (result.isOk) {
+
+  // ▶️ ENVIA LEAD PARA GOOGLE SHEETS (NOVA FUNÇÃO)
+  const dados = new URLSearchParams();
+  dados.append("nome", leadData.name);
+  dados.append("email", leadData.email);
+  dados.append("telefone", leadData.phone);
+  dados.append("empresa", leadData.company);
+  dados.append("mensagem", leadData.message);
+  dados.append("origem", "Formulario WhatsApp");
+  dados.append("botao", "Abrir Conversa no WhatsApp");
+
+  fetch("https://script.google.com/macros/s/AKfycbxFbKvKQlnerL03yO7yKZWRP6AGqezfbrIoapkgk3BT9h__BxKFYxILYjwtCXyPSsgF/exec", {
+    method: "POST",
+    body: dados
+  }).catch(() => {
+    console.warn("Falha ao enviar para Google Sheets");
+  });
+
+  // Aguarda 500ms para garantir que o envio foi concluído
+  await new Promise(resolve => setTimeout(resolve, 500));
+
+  // Fecha o modal
+  modalWhatsapp.classList.remove('active');
+
+  // Aguarda mais 300ms para suavizar a transição
+  await new Promise(resolve => setTimeout(resolve, 300));
+
+  // ▶️ REDIRECIONAMENTO (JÁ EXISTENTE – NÃO MEXIDO)
+  const whatsappUrl = 'https://wa.me/message/BWP7HVL34QQ4P1';
+  window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+  // Reseta o botão e o formulário
+  submitBtn.innerHTML = originalText;
+  submitBtn.disabled = false;
+  formWhatsapp.reset();
+}
+ else {
             // Exibe mensagem de erro
             const errorDiv = document.createElement('div');
             errorDiv.textContent = 'Erro ao enviar. Tente novamente.';
@@ -1784,6 +1803,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </script> 
  </body>
 </html>
+
 
 
 
