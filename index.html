@@ -1781,70 +1781,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFbKvKQlnerL03yO7yKZWRP6AGqezfbrIoapkgk3BT9h__BxKFYxILYjwtCXyPSsgF/exec";
-  const form = document.getElementById("form-whatsapp");
-  const btn = document.getElementById("btn-submit-whatsapp");
-
-  if (!form || !btn) return;
-
-  btn.addEventListener("click", function () {
-
-    const nome = document.getElementById("whats-name").value.trim();
-    const email = document.getElementById("whats-email").value.trim();
-    const telefone = document.getElementById("whats-phone").value.trim();
-
-    // validação mínima manual
-    if (!nome || !email || !telefone) {
-      alert("Preencha os campos obrigatórios.");
-      return;
-    }
-
-    const empresa = document.getElementById("whats-company").value;
-    const mensagem = document.getElementById("whats-message").value;
-
-    const dados = new URLSearchParams();
-    dados.append("nome", nome);
-    dados.append("email", email);
-    dados.append("telefone", telefone);
-    dados.append("empresa", empresa);
-    dados.append("mensagem", mensagem);
-    dados.append("origem", "Formulario WhatsApp");
-    dados.append("botao", "Abrir Conversa no WhatsApp");
-
-    fetch(SCRIPT_URL, {
-      method: "POST",
-      body: dados
-    })
-    .then(() => {
-
-      form.reset();
-
-      const texto = `Olá! Meu nome é ${nome}. Gostaria de falar com a equipe da DNA.`;
-      const whatsappURL = `https://wa.me/5519996081130?text=${encodeURIComponent(texto)}`;
-
-      window.location.href = whatsappURL;
-
-    })
-    .catch(() => {
-      alert("Erro ao enviar. Tente novamente.");
-    });
-
-  });
-
-});
-</script>
-
-
-
-
- 
+</script> 
  </body>
 </html>
+
 
 
 
