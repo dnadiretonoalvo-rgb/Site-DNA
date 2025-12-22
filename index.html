@@ -1719,4 +1719,75 @@
     });
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b126b3a636ca5e7',t:'MTc2NjI2ODA5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>
+document.getElementById("form-diagnostico").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const data = {
+    formType: "diagnostico",
+    name: document.getElementById("diag-name").value,
+    email: document.getElementById("diag-email").value,
+    phone: document.getElementById("diag-phone").value,
+    company: document.getElementById("diag-company").value,
+    message: document.getElementById("diag-message").value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycby1bra0wRXkm__edlEE-DpHf1747voqnaAD5XhIshhSXqJn_P8Hp7QdvI3HQYFQr9uMGg/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(response => {
+    if (response.success) {
+      alert("Solicitação enviada com sucesso!");
+      document.getElementById("form-diagnostico").reset();
+    } else {
+      alert("Erro ao enviar. Tente novamente.");
+    }
+  })
+  .catch(() => alert("Erro de conexão."));
+});
+</script>
+
+ <script>
+document.getElementById("form-whatsapp").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("whats-name").value;
+  const email = document.getElementById("whats-email").value;
+  const phone = document.getElementById("whats-phone").value;
+  const company = document.getElementById("whats-company").value;
+  const message = document.getElementById("whats-message").value;
+
+  const data = {
+    formType: "whatsapp",
+    name,
+    email,
+    phone,
+    company,
+    message
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycby1bra0wRXkm__edlEE-DpHf1747voqnaAD5XhIshhSXqJn_P8Hp7QdvI3HQYFQr9uMGg/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(() => {
+    const whatsappMessage = `
+Olá, meu nome é ${name}.
+Email: ${email}
+Empresa: ${company}
+
+Mensagem:
+${message}
+    `;
+
+    const whatsappURL = `https://wa.me/5519996744517?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappURL, "_blank");
+  })
+  .catch(() => alert("Erro ao iniciar conversa."));
+});
+</script>
 </html>
+
