@@ -1789,20 +1789,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFbKvKQlnerL03yO7yKZWRP6AGqezfbrIoapkgk3BT9h__BxKFYxILYjwtCXyPSsgF/exec";
 
   const form = document.getElementById("form-whatsapp");
-  
+
   if (!form) return;
 
   form.addEventListener("submit", function (e) {
     e.preventDefault(); // bloqueia envio padrão
 
     const dados = new URLSearchParams();
-    dados.append("nome", document.getElementById("diag-name").value);
-    dados.append("email", document.getElementById("diag-email").value);
-    dados.append("telefone", document.getElementById("diag-phone").value);
-    dados.append("empresa", document.getElementById("diag-company").value);
-    dados.append("mensagem", document.getElementById("diag-message").value);
-    dados.append("origem", "Landing page");
-    dados.append("botao", "Garantir Minha Avaliação Gratuita");
+    dados.append("nome", document.getElementById("whats-name").value);
+    dados.append("email", document.getElementById("whats-email").value);
+    dados.append("telefone", document.getElementById("whats-phone").value);
+    dados.append("empresa", document.getElementById("whats-company").value);
+    dados.append("mensagem", document.getElementById("whats-message").value);
+    dados.append("origem", "Formulario WhatsApp");
+    dados.append("botao", "Abrir Conversa no WhatsApp");
 
     fetch(SCRIPT_URL, {
       method: "POST",
@@ -1821,11 +1821,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-
-
  
  </body>
 </html>
+
 
 
 
