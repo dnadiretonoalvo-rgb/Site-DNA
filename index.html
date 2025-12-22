@@ -1797,26 +1797,26 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault(); // bloqueia envio padrão
 
     const dados = new URLSearchParams();
-    dados.append("nome", document.getElementById("whats-name").value);
-    dados.append("email", document.getElementById("whats-email").value);
-    dados.append("telefone", document.getElementById("whats-phone").value);
-    dados.append("empresa", document.getElementById("whats-company").value);
-    dados.append("mensagem", document.getElementById("whats-message").value);
-    dados.append("origem", "Landing Page");
-    dados.append("botao", "Formulario WhatsApp");
+    dados.append("nome", document.getElementById("diag-name").value);
+    dados.append("email", document.getElementById("diag-email").value);
+    dados.append("telefone", document.getElementById("diag-phone").value);
+    dados.append("empresa", document.getElementById("diag-company").value);
+    dados.append("mensagem", document.getElementById("diag-message").value);
+    dados.append("origem", "Formulario Diagnostico");
+    dados.append("botao", "Garantir Minha Avaliação Gratuita");
 
     fetch(SCRIPT_URL, {
       method: "POST",
       body: dados
     })
     .then(() => {
+      alert("Solicitação enviada com sucesso!");
       form.reset();
-      form.classList.add("hidden");
-      sucesso.classList.remove("hidden");
     })
     .catch(() => {
       alert("Erro ao enviar. Tente novamente.");
     });
+
   });
 
 });
@@ -1827,6 +1827,7 @@ document.addEventListener("DOMContentLoaded", function () {
  
  </body>
 </html>
+
 
 
 
