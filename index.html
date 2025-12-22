@@ -1851,8 +1851,49 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFbKvKQlnerL03yO7yKZWRP6AGqezfbrIoapkgk3BT9h__BxKFYxILYjwtCXyPSsgF/exec";
+
+  const form = document.getElementById("form-whatsapp");
+  const sucesso = document.getElementById("mensagem-sucesso");
+
+  if (!form) return;
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); // bloqueia envio padrão
+
+    const dados = new URLSearchParams();
+    dados.append("nome", document.getElementById("whats-name").value);
+    dados.append("email", document.getElementById("whats-email").value);
+    dados.append("telefone", document.getElementById("whats-phone").value);
+    dados.append("empresa", document.getElementById("whats-company").value);
+    dados.append("mensagem", document.getElementById("whats-message").value);
+    dados.append("origem", "Landing Page");
+    dados.append("botao", "Formulario WhatsApp");
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      body: dados
+    })
+    .then(() => {
+      form.reset();
+      form.classList.add("hidden");
+      sucesso.classList.remove("hidden");
+    })
+    .catch(() => {
+      alert("Erro ao enviar. Tente novamente.");
+    });
+  });
+
+});
+</script>
+
+
  </body>
 </html>
+
 
 
 
