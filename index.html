@@ -1789,8 +1789,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFbKvKQlnerL03yO7yKZWRP6AGqezfbrIoapkgk3BT9h__BxKFYxILYjwtCXyPSsgF/exec";
 
   const form = document.getElementById("form-whatsapp");
-  const sucesso = document.getElementById("mensagem-sucesso");
-
+  
   if (!form) return;
 
   form.addEventListener("submit", function (e) {
@@ -1802,7 +1801,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dados.append("telefone", document.getElementById("diag-phone").value);
     dados.append("empresa", document.getElementById("diag-company").value);
     dados.append("mensagem", document.getElementById("diag-message").value);
-    dados.append("origem", "Formulario Diagnostico");
+    dados.append("origem", "Landing page");
     dados.append("botao", "Garantir Minha Avaliação Gratuita");
 
     fetch(SCRIPT_URL, {
@@ -1827,6 +1826,7 @@ document.addEventListener("DOMContentLoaded", function () {
  
  </body>
 </html>
+
 
 
 
