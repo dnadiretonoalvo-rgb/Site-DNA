@@ -1801,8 +1801,59 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script> 
+
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFbKvKQlnerL03yO7yKZWRP6AGqezfbrIoapkgk3BT9h__BxKFYxILYjwtCXyPSsgF/exec";
+  const form = document.getElementById("form-whatsapp");
+
+  if (!form) {
+    console.error("Formulário WhatsApp não encontrado");
+    return;
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const nome = document.getElementById("whats-name")?.value || "";
+    const email = document.getElementById("whats-email")?.value || "";
+    const telefone = document.getElementById("whats-phone")?.value || "";
+    const empresa = document.getElementById("whats-company")?.value || "";
+    const mensagem = document.getElementById("whats-message")?.value || "";
+
+    if (!nome || !email || !telefone) {
+      alert("Preencha os campos obrigatórios.");
+      return;
+    }
+
+    const dados = new URLSearchParams({
+      nome,
+      email,
+      telefone,
+      empresa,
+      mensagem,
+      origem: "Formulario WhatsApp",
+      botao: "Abrir Conversa no WhatsApp"
+    });
+
+    fetch(SCRIPT_URL, { method: "POST", body: dados })
+      .then(() => {
+        alert("Solicitação enviada com sucesso!");
+        form.reset();
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Erro ao enviar. Tente novamente.");
+      });
+  });
+
+});
+</script>
+
  </body>
 </html>
+
 
 
 
