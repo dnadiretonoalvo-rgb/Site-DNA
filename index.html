@@ -1747,49 +1747,31 @@ document.getElementById("form-diagnostico").addEventListener("submit", function(
 });
 </script>
 
-
-<script>
+ <script>
 document.getElementById("form-whatsapp").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const name = document.getElementById("whats-name").value;
-  const email = document.getElementById("whats-email").value;
-  const phone = document.getElementById("whats-phone").value;
-  const company = document.getElementById("whats-company").value;
-  const message = document.getElementById("whats-message").value;
+  e.preventDefault(); // impede submit padrão
 
   const params = new URLSearchParams();
   params.append("formType", "whatsapp");
-  params.append("name", name);
-  params.append("email", email);
-  params.append("phone", phone);
-  params.append("company", company);
-  params.append("message", message);
+  params.append("name", document.getElementById("whats-name").value);
+  params.append("email", document.getElementById("whats-email").value);
+  params.append("phone", document.getElementById("whats-phone").value);
+  params.append("company", document.getElementById("whats-company").value);
+  params.append("message", document.getElementById("whats-message").value);
 
   fetch("https://script.google.com/macros/s/AKfycbyEqMVX6UeQsbGJnwp54QRGpzrooIyn2_RbalBCDnBGGv150baWpfxPzTJc9dzKOCr5KQ/exec", {
     method: "POST",
     body: params
-  })
-  .then(() => {
-    const text = `Olá, meu nome é ${name}.
-Email: ${email}
-Empresa: ${company}
-
-Mensagem:
-${message}`;
-
-    window.open(
-      `https://wa.me/5519996744517?text=${encodeURIComponent(text)}`,
-      "_blank"
-    );
-  })
-  .catch(() => {
-    alert("Erro ao conectar com o servidor.");
+  }).catch(() => {
+    console.warn("Falha ao gravar dados no Google Sheets");
   });
+
+  // ⚠️ NADA de window.open aqui
 });
 </script>
 
 </html>
+
 
 
 
