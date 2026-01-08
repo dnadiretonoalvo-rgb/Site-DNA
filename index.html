@@ -244,44 +244,79 @@
   </style>
   <style>@view-transition { navigation: auto; }</style>
  </head>
- <body class="h-full w-full">
-  <div id="main-wrapper" class="w-full h-full overflow-auto"><!-- Header -->
-   <header class="sticky-header shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-     <div class="flex justify-between items-center">
-      <div class="flex items-center space-x-3">
-       <svg width="40" height="40" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><defs>
-         <lineargradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#0d4f6e;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#c9a961;stop-opacity:1" />
-         </lineargradient>
-        </defs> <circle cx="20" cy="20" r="3" fill="url(#logoGradient)" /> <circle cx="20" cy="20" r="8" stroke="url(#logoGradient)" stroke-width="2" fill="none" /> <circle cx="20" cy="20" r="15" stroke="url(#logoGradient)" stroke-width="1.5" fill="none" stroke-dasharray="4 4" /> <path d="M20 5 L20 12" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round" /> <path d="M35 20 L28 20" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round" />
-       </svg>
-       <div>
-        <div id="company-name" class="text-xl font-bold logo-gradient">
-         DNA
-        </div>
-        <div class="text-xs text-gray-600">
-         Direto no Alvo
-        </div>
-       </div>
-      </div><button id="header-cta" class="btn-primary px-6 py-2.5 rounded-lg font-semibold text-white shadow-lg" style="background: linear-gradient(135deg, #c9a961 0%, #d4b875 100%);"> Comece Agora </button>
-     </div>
+ Aqui está o código completo e corrigido.
+
+**O que eu fiz:**
+
+1. **Limpeza:** Removi o título branco duplicado e o código quebrado.
+2. **Estrutura:** Coloquei o título Dourado **dentro** da `section`. Antes ele estava flutuando fora dela, por isso o fundo não se aplicava ao texto.
+3. **Cor:** Apliquei o Azul Petróleo (`#005F6B`) na `section` e ajustei a grade de fundo (grid) para branco (`stroke="#ffffff"`) para ficar visível sobre o azul.
+
+```html
+<body class="h-full w-full">
+    <div id="main-wrapper" class="w-full h-full overflow-auto">
+        
+        <header class="sticky-header shadow-sm bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <svg width="40" height="40" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <lineargradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0d4f6e;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#c9a961;stop-opacity:1" />
+                                </lineargradient>
+                            </defs>
+                            <circle cx="20" cy="20" r="3" fill="url(#logoGradient)" />
+                            <circle cx="20" cy="20" r="8" stroke="url(#logoGradient)" stroke-width="2" fill="none" />
+                            <circle cx="20" cy="20" r="15" stroke="url(#logoGradient)" stroke-width="1.5" fill="none" stroke-dasharray="4 4" />
+                            <path d="M20 5 L20 12" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round" />
+                            <path d="M35 20 L28 20" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <div>
+                            <div id="company-name" class="text-xl font-bold logo-gradient">
+                                DNA
+                            </div>
+                            <div class="text-xs text-gray-600">
+                                Direto no Alvo
+                            </div>
+                        </div>
+                    </div>
+                    <button id="header-cta" class="btn-primary px-6 py-2.5 rounded-lg font-semibold text-white shadow-lg" style="background: linear-gradient(135deg, #c9a961 0%, #d4b875 100%);"> Comece Agora </button>
+                </div>
+            </div>
+        </header>
+
+        <section class="relative overflow-hidden py-20 px-4 sm:px-6 lg:px-8" style="background: #005F6B;">
+            
+            <div class="absolute inset-0 opacity-10">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="grid" width="60" height="60" patternunits="userSpaceOnUse">
+                            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#ffffff" stroke-width="0.3" />
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                    <circle cx="85%" cy="15%" r="80" fill="#0d4f6e" opacity="0.03" />
+                    <circle cx="15%" cy="85%" r="100" fill="#c9a961" opacity="0.03" />
+                </svg>
+            </div>
+
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+                <h1 id="hero-headline" class="text-4xl sm:text-6xl lg:text-7xl font-black mb-12 leading-tight tracking-tight pb-2" style="background: linear-gradient(135deg, #fbbf24 0%, #fde047 50%, #f59e0b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 4px 12px rgba(251, 191, 36, 0.3); filter: drop-shadow(0 2px 8px rgba(251, 191, 36, 0.4));">
+                    Agência de Marketing Digital &amp; Consultoria Estratégica
+                </h1>
+                
+                <p class="text-xl sm:text-2xl mb-8 leading-relaxed max-w-3xl mx-auto text-gray-200" style="line-height: 1.8;">
+                    Atendemos Rio Claro, Araras, Piracicaba e Limeira
+                </p>
+            </div>
+        </section>
+
     </div>
-   </header><!-- Hero Section -->
-    <div class="max-w-5xl mx-auto text-center relative z-10">
-     <h1 id="hero-headline" class="text-4xl sm:text-6xl lg:text-7xl font-black mb-12 leading-tight tracking-tight pb-2" style="background: linear-gradient(135deg, #fbbf24 0%, #fde047 50%, #f59e0b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 4px 12px rgba(251, 191, 36, 0.3); filter: drop-shadow(0 2px 8px rgba(251, 191, 36, 0.4));">Agência de Marketing Digital &amp; Consultoria Estratégica</h1>
-    <div class="max-w-5xl mx-auto text-center relative z-10">
-     <h1 id="hero-headline" class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-8 text-white" style="font-family: 'Inter', sans-serif; text-shadow: 0 0 40px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.2), 0 2px 8px rgba(0, 0, 0, 0.4); letter-spacing: -0.02em;">Marketing &amp; Consultoria Digital <span class="text-5xl sm:text-6xl lg:text-6xl font-bold block mt-5">Que estrutura, conecta e faz seu negócio crescer. </h1></span> 
-      <section class="text-white py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden" style="background: #0E2A47;">
-    <div class="absolute inset-0 opacity-5">
-     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs>
-       <pattern id="grid" width="60" height="60" patternunits="userSpaceOnUse">
-        <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#0d4f6e" stroke-width="0.3" />
-       </pattern>
-      </defs> <rect width="100%" height="100%" fill="url(#grid)" /> <circle cx="85%" cy="15%" r="80" fill="#0d4f6e" opacity="0.03" /> <circle cx="15%" cy="85%" r="100" fill="#c9a961" opacity="0.03" />
-     </svg>
-    </div>  
+</body>
+
+```
      <p h2 id="hero-subheadline-1" class="text-base sm:text-lg mb-8 leading-relaxed max-w-3xl mx-auto text-gray-200" style="line-height: 1.8;"> Atendemos Rio Claro, Araras, Piracicaba e Limeira</p>
      <div id="hero-subheadline-2" class="text-lg sm:text-xl mb-12 leading-relaxed max-w-3xl mx-auto">
       <p class="font-light mb-3 text-white" style="font-size: 1rem; letter-spacing: 0.01em; line-height: 1.6;">Seu negócio <span class="italic" style="text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.5);">não precisa SÓ DE MARKETING</span>.</p>
@@ -1780,6 +1815,7 @@ document.getElementById("form-whatsapp").addEventListener("submit", function(e) 
 </script>
 
 </html>
+
 
 
 
