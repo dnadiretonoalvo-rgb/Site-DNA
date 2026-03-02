@@ -2720,6 +2720,8 @@ document.getElementById("leadForm").addEventListener("submit", async function(e)
 
 <script>
 
+document.addEventListener('DOMContentLoaded', function() {
+
 /* Cinematic Reveal */
 // mark all sections as reveal targets automatically
 document.querySelectorAll('section').forEach(sec => sec.classList.add('reveal'));
@@ -2774,6 +2776,8 @@ backToTopBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+});
+
 </script>
 
   <!-- Botão Voltar ao Topo -->
@@ -2783,6 +2787,7 @@ backToTopBtn.addEventListener('click', () => {
 
   </body>
 </html>
+
 
 
 
