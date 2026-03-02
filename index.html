@@ -2743,8 +2743,6 @@ document.getElementById("leadForm").addEventListener("submit", async function(e)
 document.addEventListener('DOMContentLoaded', function() {
 
 /* Cinematic Reveal */
-// mark all sections as reveal targets automatically
-document.querySelectorAll('section').forEach(sec => sec.classList.add('reveal'));
 const revealElements = document.querySelectorAll('.reveal');
 
 // keep track of scroll direction so we can fade-out when going up
@@ -2756,21 +2754,28 @@ window.addEventListener('scroll', () => {
   lastScroll = y;
 }, {passive: true});
 
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('active');
-    } else if(!entry.isIntersecting && scrollDir === 'up'){
-      entry.target.classList.remove('active');
-    }
-  });
-},{ threshold: 0.15 });
+if ('IntersectionObserver' in window) {
 
-revealElements.forEach(el => revealObserver.observe(el));
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('active');
+      } else if(!entry.isIntersecting && scrollDir === 'up'){
+        entry.target.classList.remove('active');
+      }
+    });
+  },{ threshold: 0.15 });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+
+} else {
+  revealElements.forEach(el => el.classList.add('active'));
+}
 
 /* Mouse Light Interaction */
 document.querySelectorAll('.dark-card').forEach(card => {
   const light = card.querySelector('.mouse-light');
+  if(!light) return;
 
   card.addEventListener('mousemove', e => {
     const rect = card.getBoundingClientRect();
@@ -2782,19 +2787,21 @@ document.querySelectorAll('.dark-card').forEach(card => {
 // Botão Voltar ao Topo
 const backToTopBtn = document.getElementById('backToTopBtn');
 
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 0) {
-    backToTopBtn.style.opacity = '1';
-    backToTopBtn.style.pointerEvents = 'auto';
-  } else {
-    backToTopBtn.style.opacity = '0';
-    backToTopBtn.style.pointerEvents = 'none';
-  }
-});
+if(backToTopBtn){
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 0) {
+      backToTopBtn.style.opacity = '1';
+      backToTopBtn.style.pointerEvents = 'auto';
+    } else {
+      backToTopBtn.style.opacity = '0';
+      backToTopBtn.style.pointerEvents = 'none';
+    }
+  });
 
-backToTopBtn.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
 });
 
