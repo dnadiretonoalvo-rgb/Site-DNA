@@ -2748,6 +2748,26 @@ const revealObserver = new IntersectionObserver(entries => {
 
 revealElements.forEach(el => revealObserver.observe(el));
 
+  /* SAFARI FIX */
+if ('IntersectionObserver' in window) {
+
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('active');
+      } else if(!entry.isIntersecting && scrollDir === 'up'){
+        entry.target.classList.remove('active');
+      }
+    });
+  },{ threshold: 0.15 });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+
+} else {
+  // Fallback para Safari antigo
+  revealElements.forEach(el => el.classList.add('active'));
+}
+
 /* Mouse Light Interaction */
 document.querySelectorAll('.dark-card').forEach(card => {
   const light = card.querySelector('.mouse-light');
@@ -2787,6 +2807,7 @@ backToTopBtn.addEventListener('click', () => {
 
   </body>
 </html>
+
 
 
 
