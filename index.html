@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.diretonoalvo.com.br/">
   <meta property="og:title" content="DNA – Direto no Alvo | Estratégia e Crescimento">
-  <meta property="og:description" content="Transforme seu negócio com clareza e direção. Agende seu Raio X do Negócio gratuito.">
+  <meta property="og:description" content="Transforme seu negócio com clareza e direção. Agende seu diagnóstico estratégico gratuito.">
   <meta property="og:image" content="https://diretonoalvo.com.br/og-image.jpg"> <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -750,6 +750,26 @@
     });
   }, { threshold: 0.2 });
   cards.forEach(card => observer.observe(card));
+
+  /* SAFARI FIX */
+if ('IntersectionObserver' in window) {
+
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('active');
+      } else if(!entry.isIntersecting && scrollDir === 'up'){
+        entry.target.classList.remove('active');
+      }
+    });
+  },{ threshold: 0.15 });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+
+} else {
+  // Fallback para Safari antigo
+  revealElements.forEach(el => el.classList.add('active'));
+}
 
   // Parallax dos elementos decorativos
   const parallaxElems = document.querySelectorAll('[data-parallax-speed]');
@@ -2748,26 +2768,6 @@ const revealObserver = new IntersectionObserver(entries => {
 
 revealElements.forEach(el => revealObserver.observe(el));
 
-  /* SAFARI FIX */
-if ('IntersectionObserver' in window) {
-
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('active');
-      } else if(!entry.isIntersecting && scrollDir === 'up'){
-        entry.target.classList.remove('active');
-      }
-    });
-  },{ threshold: 0.15 });
-
-  revealElements.forEach(el => revealObserver.observe(el));
-
-} else {
-  // Fallback para Safari antigo
-  revealElements.forEach(el => el.classList.add('active'));
-}
-
 /* Mouse Light Interaction */
 document.querySelectorAll('.dark-card').forEach(card => {
   const light = card.querySelector('.mouse-light');
@@ -2801,15 +2801,12 @@ backToTopBtn.addEventListener('click', () => {
 </script>
 
   <!-- Botão Voltar ao Topo -->
-  <div id="backToTopBtn" class="fixed bottom-8 left-8 w-12 h-12 rounded-lg flex items-center justify-center cursor-pointer transition-all duration-300 opacity-0 pointer-events-none hover:scale-110 z-50" style="background: linear-gradient(135deg, #c9a961 0%, #d4b875 100%); box-shadow: 0 4px 15px rgba(201, 169, 97, 0.4);">
+  <div id="backToTopBtn" class="fixed bottom-8 right-8 w-12 h-12 rounded-lg flex items-center justify-center cursor-pointer transition-all duration-300 opacity-0 pointer-events-none hover:scale-110 z-50" style="background: linear-gradient(135deg, #c9a961 0%, #d4b875 100%); box-shadow: 0 4px 15px rgba(201, 169, 97, 0.4);">
     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" transform="rotate(90 12 12)" /></svg>
   </div>
 
   </body>
 </html>
-
-
-
 
 
 
