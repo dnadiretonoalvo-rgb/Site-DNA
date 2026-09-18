@@ -3,9 +3,9 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
-export default defineConfig(() => {base: '/Site-DNA/',
-  plugins: [react()],
+export default defineConfig(() => {
   return {
+    base: '/Site-DNA/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
